@@ -3,7 +3,9 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { ICategory } from '../interfaces/icategory';
 import { IProduct } from '../interfaces/iproduct';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ProductService {
   constructor(private afd: AngularFireDatabase) {}
 

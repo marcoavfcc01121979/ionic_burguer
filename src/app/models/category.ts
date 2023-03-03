@@ -1,8 +1,8 @@
-import { ICategory } from '../interfaces/icategory';
+import { ICategory } from './../interfaces/icategory';
 import { set, get } from 'lodash-es';
 
 export class Category implements ICategory {
-  constructor(data: any) {
+  constructor(data) {
     set(this, 'data', data);
   }
 
