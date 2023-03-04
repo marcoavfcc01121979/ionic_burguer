@@ -1,9 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>list-products</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content fullscreen>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let p of products" size="6">
+        <ion-card class="list" (click)="goToProduct(p)">
+          <img [src]="p.img" />
+          <ion-card-header>
+            <ion-card-title>{{ p.name | translate }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
