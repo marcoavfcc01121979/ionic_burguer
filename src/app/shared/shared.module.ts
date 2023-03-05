@@ -5,10 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { FooterComponent } from './footer/footer.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   imports: [IonicModule, CommonModule, FormsModule, TranslateModule.forChild()],
-  declarations: [FooterComponent, ToolbarComponent],
-  exports: [FooterComponent, ToolbarComponent],
+  declarations: [FooterComponent, ToolbarComponent, LoginComponent],
+  exports: [FooterComponent, ToolbarComponent, LoginComponent],
 })
 export class SharedModule {}
