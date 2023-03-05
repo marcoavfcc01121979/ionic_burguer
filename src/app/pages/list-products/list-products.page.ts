@@ -32,18 +32,18 @@ export class ListProductsPage implements OnInit {
   }
 
   loadData() {
-    this.presentLoading();
-
-    this.productService.getProducts(this.idCategory).subscribe(
-      (results) => {
-        this.products = results;
-        console.log(this.products);
-        this.dimissLoading();
-      },
-      (error) => {
-        this.dimissLoading();
-      }
-    );
+    this.presentLoading().then(() => {
+      this.productService.getProducts(this.idCategory).subscribe(
+        (results) => {
+          this.products = results;
+          console.log(this.products);
+          this.dimissLoading();
+        },
+        (error) => {
+          this.dimissLoading();
+        }
+      );
+    });
   }
 
   async presentLoading() {
