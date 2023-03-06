@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -8,7 +9,15 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./toolbar.component.css'],
 })
 export class ToolbarComponent implements OnInit {
-  constructor(private router: Router, private navCtrl: NavController) {}
+  public showInfoUser: boolean;
+
+  constructor(
+    private router: Router,
+    private navCtrl: NavController,
+    public authService: AuthService
+  ) {
+    this.showInfoUser = false;
+  }
 
   ngOnInit() {}
 
@@ -23,5 +32,17 @@ export class ToolbarComponent implements OnInit {
 
   goBack() {
     this.navCtrl.back();
+  }
+
+  showPanelUser() {
+    this.showInfoUser = true;
+  }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  back() {
+    this.showInfoUser = false;
   }
 }

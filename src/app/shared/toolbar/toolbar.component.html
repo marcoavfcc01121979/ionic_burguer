@@ -1,15 +1,29 @@
 <ion-menu side="end" content-id="content">
   <ion-header>
     <ion-toolbar translucent color="light">
-      <ion-title>Start Menu</ion-title>
+      <ion-item lines="none">
+        <ion-icon name="arrow-back-outline" *ngIf="showInfoUser" (click)="back()"></ion-icon>
+        <ion-title>{{ 'label.menu' | translate }}</ion-title>
+      </ion-item>
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <!-- <ion-list>
-      <ion-item>Menu Item</ion-item>
-      <ion-item>Menu Item</ion-item>
-    </ion-list> -->
-    <app-login></app-login>
+    <ng-container *ngIf="!showInfoUser">
+      <ion-list>
+        <ion-item (click)="authService.isLogged ? logout() : showPanelUser()">
+          <ion-icon slot="start" name="person-outline"></ion-icon>
+          <ion-label>{{(authService.isLogged ? 'label.logout' : 'label.start.session') | translate}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+
+    <ng-container *ngIf="showInfoUser">
+      <app-login></app-login>
+    </ng-container>
+
+
+    <!-- <app-login></app-login> -->
+    <!-- <app-create-account></app-create-account> -->
   </ion-content>
 </ion-menu>
 

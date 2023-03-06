@@ -1,20 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-create-account',
+  templateUrl: './create-account.component.html',
+  styleUrls: ['./create-account.component.css'],
 })
-export class LoginComponent implements OnInit {
-  @Input() showBack = true;
-
-  @Output() newAccount: EventEmitter<boolean>;
+export class CreateAccountComponent implements OnInit {
   @Output() back: EventEmitter<boolean>;
-  @Output() doLogin: EventEmitter<boolean>;
+  @Output() doCreateAccount: EventEmitter<boolean>;
 
   public user: User;
 
@@ -23,34 +20,29 @@ export class LoginComponent implements OnInit {
     private toastService: ToastService,
     private translate: TranslateService
   ) {
-    this.newAccount = new EventEmitter<boolean>();
-    this.back = new EventEmitter<boolean>();
-    this.doLogin = new EventEmitter<boolean>();
     this.user = new User({});
+    this.back = new EventEmitter<boolean>();
+    this.doCreateAccount = new EventEmitter<boolean>();
   }
 
   ngOnInit() {}
 
-  logIn() {
+  createAccount() {
     this.authService
-      .login(this.user.email, this.user.password)
+      .createAccount(this.user.email, this.user.password)
       .then((result) => {
         console.log(result);
+        this.doCreateAccount.emit(true);
         this.toastService.showToast(
-          this.translate.instant('label.login.success')
+          this.translate.instant('label.create.account.success')
         );
-        this.doLogin.emit(true);
       })
       .catch((error) => {
         console.log(error);
         this.toastService.showToast(
-          this.translate.instant('label.login.error')
+          this.translate.instant('label.create.account.error')
         );
       });
-  }
-
-  showNewAccount() {
-    this.newAccount.emit(true);
   }
 
   exit() {
