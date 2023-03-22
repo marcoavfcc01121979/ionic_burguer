@@ -10,8 +10,8 @@ export class UserService {
   constructor(private afd: AngularFireDatabase) {}
 
   addUser(user: User) {
-    unset(user, 'password');
-    this.afd.list('users').push(user);
+    unset(user, 'data.password');
+    this.afd.list('users').push(user.getData());
   }
 
   getAddressUser(email: string) {

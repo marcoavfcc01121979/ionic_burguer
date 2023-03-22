@@ -14,11 +14,21 @@
           <ion-icon slot="start" name="person-outline"></ion-icon>
           <ion-label>{{(authService.isLogged ? 'label.logout' : 'label.start.session') | translate}}</ion-label>
         </ion-item>
+
+        <app-list-product-order></app-list-product-order>
       </ion-list>
     </ng-container>
 
     <ng-container *ngIf="showInfoUser">
-      <app-login></app-login>
+      <app-login *ngIf="!showNewAccount"
+        (newAccount)="newAccount()"
+        (back)="back()"
+        (doLogin)="back()"
+      ></app-login>
+      <app-create-account *ngIf="showNewAccount"
+        (back)="showLogin()"
+        (doCreateAccount)="back()"
+      ></app-create-account>
     </ng-container>
 
 

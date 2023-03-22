@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ToolbarComponent implements OnInit {
   public showInfoUser: boolean;
+  public showNewAccount: boolean;
 
   constructor(
     private router: Router,
@@ -17,6 +18,7 @@ export class ToolbarComponent implements OnInit {
     public authService: AuthService
   ) {
     this.showInfoUser = false;
+    this.showNewAccount = false;
   }
 
   ngOnInit() {}
@@ -44,5 +46,14 @@ export class ToolbarComponent implements OnInit {
 
   back() {
     this.showInfoUser = false;
+    this.showNewAccount = false;
+  }
+
+  newAccount() {
+    this.showNewAccount = true;
+  }
+
+  showLogin() {
+    this.showNewAccount = false;
   }
 }

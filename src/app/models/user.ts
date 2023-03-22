@@ -6,6 +6,10 @@ export class User implements IUser {
     set(this, 'data', data);
   }
 
+  getData() {
+    return get(this, 'data');
+  }
+
   get email(): string {
     return get(this, 'data.email');
   }

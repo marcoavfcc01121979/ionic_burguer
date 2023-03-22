@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LoginComponent } from './login/login.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { ListProductOrderComponent } from './list-product-order/list-product-order.component';
 
 @NgModule({
   imports: [IonicModule, CommonModule, FormsModule, TranslateModule.forChild()],
@@ -15,12 +16,14 @@ import { CreateAccountComponent } from './create-account/create-account.componen
     ToolbarComponent,
     LoginComponent,
     CreateAccountComponent,
+    ListProductOrderComponent,
   ],
   exports: [
     FooterComponent,
     ToolbarComponent,
     LoginComponent,
     CreateAccountComponent,
+    ListProductOrderComponent,
   ],
 })
 export class SharedModule {}
