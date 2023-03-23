@@ -12,20 +12,40 @@
             <ion-label>{{ product.name | translate }}</ion-label>
           </ion-item>
 
-          <ion-card>
+          <ion-card *ngIf="product.showDetail">
             <ion-card-content>
               <ion-item lines="none">
                 <ion-label>{{ 'label.quantity' | translate }}</ion-label>
-                <ion-text>
+                <ion-text class="product-quantity">
                   <ion-icon name="remove-circle-outline" (click)="orderService.order.oneLessProduct(product)"></ion-icon>
                     {{ product.quantity }}
                   <ion-icon name="add-circle-outline" (click)="orderService.order.oneMoreProduct(product)"></ion-icon>
                 </ion-text>
               </ion-item>
+
+              <ng-container *ngIf="product.extras">
+                <ng-container *ngFor="let extra of product.extras">
+                  <ng-container *ngFor="let extraProduct of extra.products">
+                    <ion-item line="none" *ngIf="(extraProduct.options.length === 1 && extraProduct.options[0].activate)
+                      || (extraProduct.options.length > 1 && extraProduct.optionSelected)">
+
+                      <ng-container *ngIf="extraProduct.options.length === 1 && extraProduct.options[0].activate">
+                        {{( extraProduct.name | translate ) + ' (' + extraProduct.options[0].price + ' R$)'}}
+                      </ng-container>
+
+                      <ng-container *ngIf="extraProduct.options.length > 1 && extraProduct.optionSelected">
+                        {{ (extraProduct.name | translate) + ': ' + (extraProduct.optionSelected.name | translate)
+                         + '( ' + extraProduct.optionSelected.price + ' R$)' }}
+                      </ng-container>
+                    </ion-item>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+
             </ion-card-content>
           </ion-card>
 
-          <ion-item-options side="end">
+          <ion-item-options side="end" *ngIf="!product.showDetail">
             <ion-item-option color="danger" (click)="remove(product)">
               <ion-icon slot="icon-only" name="trash"></ion-icon>
             </ion-item-option>

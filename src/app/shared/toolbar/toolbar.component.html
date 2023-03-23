@@ -1,18 +1,23 @@
-<ion-menu side="end" content-id="content">
+<ion-menu side="end" content-id="content" menu-id="content">
   <ion-header>
     <ion-toolbar translucent color="light">
       <ion-item lines="none">
-        <ion-icon name="arrow-back-outline" *ngIf="showInfoUser" (click)="back()"></ion-icon>
+        <ion-icon name="arrow-back-outline" *ngIf="showInfoUser || showOrder" (click)="back()"></ion-icon>
         <ion-title>{{ 'label.menu' | translate }}</ion-title>
       </ion-item>
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ng-container *ngIf="!showInfoUser">
+    <ng-container *ngIf="!showInfoUser && !showOrder">
       <ion-list>
         <ion-item (click)="authService.isLogged ? logout() : showPanelUser()">
           <ion-icon slot="start" name="person-outline"></ion-icon>
           <ion-label>{{(authService.isLogged ? 'label.logout' : 'label.start.session') | translate}}</ion-label>
+        </ion-item>
+
+        <ion-item (click)="showPanelOrder()">
+          <ion-badge slot="start">{{ orderService.numProducts() }}</ion-badge>
+          <ion-label>{{ 'label.see.order' | translate}}</ion-label>
         </ion-item>
 
         <app-list-product-order></app-list-product-order>
@@ -30,7 +35,10 @@
         (doCreateAccount)="back()"
       ></app-create-account>
     </ng-container>
-
+    <ng-container *ngIf="showOrder">
+      <app-list-product-order></app-list-product-order>
+      <ion-button expand="block" (click)="goToPay()">{{ 'label.pay.order' | translate }}</ion-button>
+    </ng-container>
 
     <!-- <app-login></app-login> -->
     <!-- <app-create-account></app-create-account> -->

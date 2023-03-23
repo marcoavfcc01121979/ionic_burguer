@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,14 +12,18 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ToolbarComponent implements OnInit {
   public showInfoUser: boolean;
   public showNewAccount: boolean;
+  public showOrder: boolean;
 
   constructor(
     private router: Router,
     private navCtrl: NavController,
-    public authService: AuthService
+    public authService: AuthService,
+    private menuController: MenuController,
+    public orderService: OrderService
   ) {
     this.showInfoUser = false;
     this.showNewAccount = false;
+    this.showOrder = false;
   }
 
   ngOnInit() {}
@@ -47,6 +52,7 @@ export class ToolbarComponent implements OnInit {
   back() {
     this.showInfoUser = false;
     this.showNewAccount = false;
+    this.showOrder = false;
   }
 
   newAccount() {
@@ -55,5 +61,16 @@ export class ToolbarComponent implements OnInit {
 
   showLogin() {
     this.showNewAccount = false;
+  }
+
+  showPanelOrder() {
+    this.showOrder = true;
+  }
+
+  goToPay() {
+    this.back();
+
+    this.menuController.close('content');
+    this.navCtrl.navigateForward('pay');
   }
 }
