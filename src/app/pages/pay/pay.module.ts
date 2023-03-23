@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { PayPageRoutingModule } from './pay-routing.module';
 
 import { PayPage } from './pay.page';
+import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PayPageRoutingModule
+    PayPageRoutingModule,
+    SharedModule,
+    TranslateModule.forChild(),
   ],
-  declarations: [PayPage]
+  declarations: [PayPage],
 })
 export class PayPageModule {}
