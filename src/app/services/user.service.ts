@@ -16,7 +16,7 @@ export class UserService {
 
   getAddressUser(email: string) {
     return this.afd
-      .list('users', (ref) => ref.orderByChild('email').equalTo(email))
+      .list<User>('users', (ref) => ref.orderByChild('email').equalTo(email))
       .valueChanges();
   }
 }

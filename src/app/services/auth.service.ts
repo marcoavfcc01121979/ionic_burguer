@@ -34,6 +34,13 @@ export class AuthService {
     this._isLoggued = false;
   }
 
+  currentUser() {
+    if (this.afAuth.currentUser) {
+      return this.afAuth.currentUser;
+    }
+    return null;
+  }
+
   createAccount(email: string, pass: string) {
     return this.afAuth
       .isSignInWithEmailLink(email)
